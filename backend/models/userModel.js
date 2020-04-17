@@ -11,22 +11,38 @@ const userSchema = new Schema({
         minLength: 3
     },
 
-    password: {
-        type: String,
-        required: true
+    email: {
+        type: String, 
+        required: true,
+        unique: true,
+        trim: true,
     },
 
-    eCurrency: {
-        type: Number,
-        required: true
+    firstname: {
+        type: String, 
+        required: true,
+        trim: true,
     },
 
-    postsTouched: {
-        type: Object
+    lastname: {
+        type: String, 
+        required: true,
+        trim: true,
     }
+    // password: {
+    //     type: String,
+    //     required: true
+    // },
 
-}, {
-    timestamps: true
+    // eCurrency: {
+    //     type: Number,
+    //     required: true
+    // },
+
+    // postsTouched: {
+    //     type: Object
+    // }
+
 });
 
 const User = mongoose.model('User', userSchema);
