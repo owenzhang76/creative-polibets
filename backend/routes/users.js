@@ -5,12 +5,14 @@ router.route('/register').post((req, res) => {
     console.log("Inside /users/register Post");
 
     let username = req.body.username;
+    let password = req.body.password;
     let email = req.body.email;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
 
     let newUser = new User ({
         username: username,
+        password: password,
         email: email,
         firstname: firstname,
         lastname: lastname
