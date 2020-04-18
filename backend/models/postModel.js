@@ -11,6 +11,11 @@ const postSchema = new Schema({
         minLength: 3
     },
 
+    owner : {
+        type: Object,
+        required: true,
+    },
+
     A: {
         type: Number,
         required: true
@@ -19,10 +24,6 @@ const postSchema = new Schema({
     B: {
         type: Number,
         required: true
-    },
-
-    postsTouched: {
-        type: Object
     }
 
 }, {

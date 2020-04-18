@@ -5,7 +5,12 @@ export default class Navbar extends Component {
     render() {
         return (
           <nav className="">
-            lol
+              <form onSubmit={this.onSubmit}> 
+                <h1>Create Betting Post</h1>
+                <label>Name Your Post:</label>
+                <input id="postname-submit" type="text" value={this.state.postname} onChange={this.onChangePostname} />
+                <br />
+            </form>          
           </nav>
         );
     }
