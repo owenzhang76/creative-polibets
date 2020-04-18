@@ -1,19 +1,23 @@
 const router = require('express').Router();
 let Post = require('../models/postModel');
 
-router.route('/register').post((req, res) => {
-    console.log("Inside /post/register Post");
+router.route('/homepage').post((req, res) => {
+    console.log("Inside /post/homepage Post");
 
-    let postname = req.body.postname;
-    let owner = req.body.owner;
-    let A = req.body.A;
-    let B = req.body.B;
+    let eventname = req.body.eventname;
+    let eventdescription = req.body.eventdescription;
+    let optionA = req.body.optionA;
+    let optionB = req.body.optionB;
+    let optionACurrency = req.body.optionACurrency;
+    let optionBCurrency = req.body.optionBCurrency;
 
-    let newPost = new User ({
-        postname: postname,
-        owner: owner,
-        A: A,
-        B: B
+    let newPost = new Post ({
+        eventname: eventname,
+        eventdescription: eventdescription,
+        optionA: optionA,
+        optionB: optionB,
+        optionACurrency: optionACurrency,
+        optionBCurrency: optionBCurrency
     });
 
     console.log(newPost);

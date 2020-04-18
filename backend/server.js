@@ -24,10 +24,11 @@ connection.once('open', function() {
 // require files
 //const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
 
 // user files
 app.use('/users', usersRouter);
-//app.use('/posts', postsRouter);
+app.use('/posts', postsRouter);
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);
