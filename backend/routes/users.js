@@ -23,8 +23,36 @@ router.route('/register').post((req, res) => {
     newUser.save()
         .then(() => res.json('New user added!'))
         .catch(err => res.status(400).json('Error: ' + err))
+});
 
-    
+router.route('/login').post((req, res) => {
+    console.log("Inside /users/login Post");
+
+    let username = req.body.username;
+    let password = req.body.password;
+
+    let checkUser = new User ({
+        username: username,
+        password: password,
+    });
+
+    console.log(checkUser);
+
+    User.findOne({username: req.body.username}, function(err, user) {
+        if (err) {
+            console.log(err);
+        } else if (!user) {
+            console.log(`${req.body.username} not found`);
+        } else {
+            console.log(`this is the user: ${user}`);
+            //res.render()
+        }
+    })
+    .then((data) => res.json(data))
+    // .then((data) => {
+    //     res.json(data);
+    // })
+    .catch(err => res.status(400).json('Error: ' + err))
 });
 
 module.exports = router;

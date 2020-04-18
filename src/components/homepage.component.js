@@ -14,9 +14,17 @@ export default class homepage extends Component {
     };
 
     componentDidMount() {
-        this.setState({
-            
-        });
+        // this.setState({
+
+        // });
     }
+    
+    render() {
+        return (
+        <div>
+            This is the homepage
+        </div>
+        );
+    };
 
 }
