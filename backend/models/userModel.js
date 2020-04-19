@@ -2,37 +2,36 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minLength: 3
+        default: ""
     },
 
     password: {
         type: String,
-        required: true
+        default: ""
     },
 
     email: {
         type: String, 
-        required: true,
-        unique: true,
-        trim: true,
+        default: ""
     },
 
     firstname: {
         type: String, 
-        required: true,
-        trim: true,
+        default: ""
     },
 
     lastname: {
         type: String, 
-        required: true,
-        trim: true,
+        default: ""
+    },
+
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
     // password: {
     //     type: String,
@@ -49,6 +48,14 @@ const userSchema = new Schema({
     // }
 
 });
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+}
 
 const User = mongoose.model('User', userSchema);
 
