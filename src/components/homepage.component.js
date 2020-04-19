@@ -13,12 +13,14 @@ export default class homepage extends Component {
     };
 
     componentDidMount() {
-        // this.setState({
-
-        // });
+        this.setState({
+            username: 'hi',
+        });
     }
     
     render() {
+        console.log("rendering home page");
+        console.log(this.state.username);
         return (
         <div>
             This is the homepage

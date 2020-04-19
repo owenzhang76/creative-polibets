@@ -43,7 +43,9 @@ export default class loginForm extends Component {
                 console.log(res.data);
                 //console.log(this.props.setUser);
                 // How can I pass the user object which is in res.data to my homepage component?
-
+                console.log(this.props.setUser);
+                console.log(this);
+                this.props.setUser(res.data['username']);
                 this.setState({
                     username: "",
                     password: "",
