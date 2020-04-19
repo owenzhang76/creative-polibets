@@ -17,14 +17,6 @@ export default class App extends React.Component {
       loggedIn: false,
     };
   };
-  
-  renderHome(user) {
-    return (
-      <homepage user={user} />
-
-
-    );
-  } 
 
   setUser(user) {
     console.log("inside setUser function");
@@ -32,16 +24,18 @@ export default class App extends React.Component {
   }
 
   render () {
+    const setUser = (userData) => console.log(userData);
     return (
       <Router>
-        <Navbar />
-        <br />
+        <Navbar/>
+        <br/>
         <Route path="/" exact component={registerForm}></Route>
         <Route path="/home" exact component={homepage}></Route>
-        <Route path="/login" exact component={loginForm} setUser={this.setUser} ></Route>
-        {/* <Route path="/login" exact component={loginPage}></Route>
-        <Route path="/signup" exact component={signupPage}></Route>
-        <Route path="/createPost" exact component={createPostPage}></Route> */}
+        <Route path="/login" exact component={loginForm} setUser={setUser} ></Route>
+        {/* <Route
+          path="/login"
+          render={(props) => <homepage {...props} username={loggedIn} />}
+        > */}
       </Router>
     );
   }

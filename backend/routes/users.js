@@ -48,10 +48,14 @@ router.route('/login').post((req, res) => {
             //res.render()
         }
     })
-    .then((data) => res.json(data))
     // .then((data) => {
-    //     res.json(data);
+    //     const stuff = res.json(data);
+    //     console.log("yeet");
+    //     console.log(stuff);
+    //     res.redirect('/home', stuff)
     // })
+    .then((data) => res.json(data))
+    // .then(res.redirect('home', data));
     .catch(err => res.status(400).json('Error: ' + err))
 });
 
