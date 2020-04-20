@@ -5,7 +5,8 @@ export default class Navbar extends Component {
     render() {
         return (
           <nav className="">
-            lol
+            <a href="http://localhost:3000/login">Login Page |</a>
+          
           </nav>
         );
     }
