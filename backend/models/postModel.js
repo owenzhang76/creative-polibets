@@ -11,16 +11,35 @@ const postSchema = new Schema({
         minLength: 3
     },
 
-    a: {
+    nameA: {
+        type: String,
+        required: true
+    },
+
+    oddsA: {
         type: Number,
         required: true
     },
 
-    b: {
+    nameB: {
+        type: String,
+        required: true
+    },
+
+    oddsB: {
         type: Number,
         required: true
     },
 
+    expiryDate: {
+        type: Date,
+        required: true
+    },
+
+    numberOfBets: {
+        type: Number,
+    },
+    
 }, {
     timestamps: true
 });

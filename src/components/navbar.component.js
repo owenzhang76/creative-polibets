@@ -8,8 +8,8 @@ export default class Navbar extends Component {
             <a href="http://localhost:3000/login">Login Page |</a>
             <a href="http://localhost:3000/">Register Page |</a>
             <a href="http://localhost:3000/home">Homepage |</a>
-            <a href="https://localhost:3000/userprofile">User Profile</a>
-            <a href="https://localhost:3000/createpost">Create Post</a>
+            <a href="http://localhost:3000/userprofile">User Profile |</a>
+            <a href="http://localhost:3000/createpost">Create Post</a>
           </nav>
         );
     }

@@ -7,7 +7,7 @@ import Navbar from "./components/navbar.component";
 import registerForm from "./components/registerForm.component";
 import HomePage from './components/homepage.component';
 import LoginForm from './components/loginForm.component';
-import CreatePost from './components/createPost.component'
+import CreatePost from './components/createPost.component';
 
 export default class App extends React.Component {
 
@@ -51,7 +51,7 @@ export default class App extends React.Component {
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
           <Route path="/home" render={props => (<HomePage {...userStuff}/>)}></Route>
-          <Route path="/createpost" render={props => (<CreatePost{...props}/>)}></Route>
+          <Route path="/createpost" render={props => (<CreatePost {...userStuff}/>)}></Route>
         </Router>
       );
   }

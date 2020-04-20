@@ -5,7 +5,17 @@ import axios from 'axios';
 export default class createPost extends Component {
     constructor(props) {
         super(props);
+         
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeNameA = this.onChangeNameA.bind(this);
+        this.onChangeOddsA = this.onChangeOddsA.bind(this);
+        this.onChangeNameB = this.onChangeNameB.bind(this);
+        this.onChangeOddsB = this.onChangeOddsB.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
+            username: this.props.username,
             creator: '',
             title: '',
             category: '',
@@ -14,6 +24,13 @@ export default class createPost extends Component {
             nameB: '',
             oddsB: '',
             expiryDate: '',
+        }
+
+        const currentUser = {
+            username: this.props.username, 
+            firstname: this.props.firstname,
+            lastname: this.props.lastname, 
+            email: this.props.email
         }
     };
 
@@ -79,7 +96,7 @@ export default class createPost extends Component {
         console.log(post);
         axios.post('http://localhost:5000/posts/create', post)
             .then(res => {
-                console.log(res.data);
+                console.log(res);
                 this.setState({
                     title: '',
                     nameA: '',
@@ -88,6 +105,7 @@ export default class createPost extends Component {
                     oddsB: '',
                     expiryDate: '',
                 });
+                this.props.setUser(this.props.username);
                 this.props.history.push('/home');
             })
             .catch((err)=>console.log(err));
@@ -99,22 +117,22 @@ export default class createPost extends Component {
             <form onSubmit={this.onSubmit}> 
                 <h1>Create a Betting Post!</h1>
                 <label>Title:</label>
-                <input id="title-submit" type="text" value={this.state.title} onChange={this.onChangeUsername} />
+                <input id="title-submit" type="text" value={this.state.title} onChange={this.onChangeTitle} />
                 <br />
                 <label>Option A:</label>
-                <input id="option-a-submit" type="text" value={this.state.nameA} onChange={this.onChangeUsername} />
+                <input id="option-a-submit" type="text" value={this.state.nameA} onChange={this.onChangeNameA} />
                 <br />
                 <label>Odds for A:</label>
-                <input id="odds-a-submit" type="text" value={this.state.oddsA} onChange={this.onChangeEmail} />
+                <input id="odds-a-submit" type="text" value={this.state.oddsA} onChange={this.onChangeOddsA} />
                 <br />
                 <label>Option B:</label>
-                <input id="option-b-submit" type="text" value={this.state.nameB} onChange={this.onChangeUsername} />
+                <input id="option-b-submit" type="text" value={this.state.nameB} onChange={this.onChangeNameB} />
                 <br />
                 <label>Odds for B:</label>
-                <input id="odds-b-submit" type="text" value={this.state.oddsB} onChange={this.onChangeEmail} />
+                <input id="odds-b-submit" type="text" value={this.state.oddsB} onChange={this.onChangeOddsB} />
                 <br />
                 <label>Post expires on date:</label>
-                <input id="date-submit" type="date" value={this.state.expiryDate} onChange={this.onChangeFirstname} />
+                <input id="date-submit" type="date" value={this.state.expiryDate} onChange={this.onChangeDate} />
                 <br />
                 <input id="create-post-submit" type="submit" />
             </form>

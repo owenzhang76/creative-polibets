@@ -20,10 +20,10 @@ export default class homepage extends Component {
             lastname: this.props.lastname,
             email: this.props.email
         });
-        axios.get('http://localhost:5000/posts')
-            .then(res => {
-                console.log(res.data);
-            })
+        // axios.get('http://localhost:5000/posts')
+        //     .then(res => {
+        //         console.log(res.data);
+        //     })
     }
     
     render() {
