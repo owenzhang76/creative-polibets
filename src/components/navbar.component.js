@@ -6,7 +6,9 @@ export default class Navbar extends Component {
         return (
           <nav className="">
             <a href="http://localhost:3000/login">Login Page |</a>
-          
+            <a href="http://localhost:3000/">Register Page |</a>
+            <a href="http://localhost:3000/homepage">Homepage |</a>
+            <a href="https://localhost:3000/userprofile">User Profile</a>
           </nav>
         );
     }
