@@ -63,6 +63,9 @@ export default class registerForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+
+        
+
         const user = {
             username: this.state.username,
             password: this.state.password,

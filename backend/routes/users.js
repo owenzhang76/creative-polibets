@@ -1,11 +1,15 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 let User = require('../models/userModel');
 
 router.route('/register').post((req, res) => {
     console.log("Inside /users/register Post");
+        
+    let password = bcrypt.hashSync(req.body.password, 10);
+
+    console.log(password);
 
     let username = req.body.username;
-    let password = req.body.password;
     let email = req.body.email;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
@@ -31,6 +35,8 @@ router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
+   
+
     let checkUser = new User ({
         username: username,
         password: password,
@@ -41,11 +47,18 @@ router.route('/login').post((req, res) => {
     User.findOne({username: req.body.username}, function(err, user) {
         if (err) {
             console.log(err);
+            throw(err);
         } else if (!user) {
-            console.log(`${req.body.username} not found`);
+            throw(`${req.body.username} not found`);
         } else {
             console.log(`this is the user: ${user}`);
             //res.render()
+            if(bcrypt.compareSync(password, user.password)) {
+                console.log("passwords match");
+                return user;
+            } else {
+                throw("incorrect pass");
+            }
         }
     })
     // .then((data) => {
