@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    postName: {
+    title: {
         type: String,
         required: true,
         unique: true,
@@ -11,19 +11,15 @@ const postSchema = new Schema({
         minLength: 3
     },
 
-    A: {
+    a: {
         type: Number,
         required: true
     },
 
-    B: {
+    b: {
         type: Number,
         required: true
     },
-
-    postsTouched: {
-        type: Object
-    }
 
 }, {
     timestamps: true

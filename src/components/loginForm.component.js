@@ -41,32 +41,15 @@ export default class loginForm extends Component {
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 console.log(res.data);
-                //console.log(this.props.setUser);
-                // How can I pass the user object which is in res.data to my homepage component?
-                console.log(this.props.setUser);
-                console.log(this);
-                this.props.setUser(res.data['username']);
                 this.setState({
                     username: "",
                     password: "",
                 });
-                //this.props.setUser(res.data['username']);
-                //window.location.href = "/home";
+                this.props.setUser(res.data);
+                this.props.history.push('/home');
             })
             .catch((err) => console.log(err));
         
-        
-
-        
-
-    //    <Link 
-    //    to={{
-    //        pathname: "/home",
-    //        data: [{"user": user,}]
-    //    }}
-    //    > <Link>
-        // window.location.href = "/home";
-
     }
 
     render() {

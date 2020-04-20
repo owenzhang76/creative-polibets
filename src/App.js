@@ -7,8 +7,8 @@ import Navbar from "./components/navbar.component";
 import registerForm from "./components/registerForm.component";
 import HomePage from './components/homepage.component';
 import LoginForm from './components/loginForm.component';
-// import signupPage from "./components/signup-page.component";
-// import createPostPage from "./components/create-post-page.component";
+import CreatePost from './components/createPost.component'
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -17,6 +17,9 @@ export default class App extends React.Component {
     this.state = {
       loggedIn: false,
       username: "",
+      firstname: '',
+      lastname: '',
+      email: '',
     };
   };
 
@@ -25,69 +28,31 @@ export default class App extends React.Component {
     console.log(user);
     this.setState({
       loggedIn: true,
-      username: user
+      username: user['username'],
+      firstname: user['firstname'],
+      lastname: user['lastname'],
+      email: user['email'],
     });
     //window.location.href='/home';
   }
 
   render () {
-    if (this.state.loggedIn) {
-      console.log('logged in');
-      return (
-        <Router>
-        {/* <Link to="/home">home</Link> */}
-        {/* <Switch> */}
-        {/* <Route path="/home" exact component={HomePage}></Route> */}
-          <Route path="/home">
-            <HomePage />
-          </Route>
-        {/* </Switch> */}
-        </Router>
-        // <HomePage />
-        // <Router>
-        //   <Navbar/>
-        //   <br/>
-          
-        //   {/* <Route path="/home" exact component={homepage}></Route> */}
-        //   <Route path="/home" render={props => (<HomePage/>)}> </Route>
-        // </Router>
-      );
-    } else {
+    const userStuff = {
+      loggedIn: this.state.loggedIn,
+      username: this.state.username,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email
+    }
       return (
         <Router>
           <Navbar/>
           <br/>
           <Route path="/" exact component={registerForm}></Route>
-          {/* <Route path="/home" exact component={homepage}></Route> */}
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
-          {/* <Route path="/login" exact component={loginForm} setUser={setUser} ></Route> */}
-          {/* <Route
-            path="/login"
-            render={(props) => <homepage {...props} username={loggedIn} />}
-          > */}
+          <Route path="/home" render={props => (<HomePage {...userStuff}/>)}></Route>
+          <Route path="/createpost" render={props => (<CreatePost{...props}/>)}></Route>
         </Router>
       );
-    }
-    //const setUser = (userData) => console.log(userData);
-    
   }
 }
-
-
-// function App() {
-//   return (
-//     <Router>
-//       <Navbar />
-//       <br />
-
-//       <Route path="/" exact component={registerForm}></Route>
-//       <Route path="/home" exact component={homepage}></Route>
-//       <Route path="login" exact component={loginForm}></Route>
-//       {/* <Route path="/login" exact component={loginPage}></Route>
-//       <Route path="/signup" exact component={signupPage}></Route>
-//       <Route path="/createPost" exact component={createPostPage}></Route> */}
-//     </Router>
-//   );
-// }
-
-// export default App;
