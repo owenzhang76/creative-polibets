@@ -15,8 +15,8 @@ export default class createPost extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            username: this.props.username,
-            creator: '',
+            username: this.props.userStuff.username,
+            creator: this.props.userStuff.username,
             title: '',
             category: '',
             nameA: '',
@@ -25,19 +25,17 @@ export default class createPost extends Component {
             oddsB: '',
             expiryDate: '',
         }
-
-        const currentUser = {
-            username: this.props.username, 
-            firstname: this.props.firstname,
-            lastname: this.props.lastname, 
-            email: this.props.email
-        }
+        
+        //console.log(`username in createPost is ${this.state.username}`)
+        // const currentUser = {
+        //     username: this.props.username, 
+        //     firstname: this.props.firstname,
+        //     lastname: this.props.lastname, 
+        //     email: this.props.email
+        // }
     };
 
     componentDidMount() {
-        this.setState({
-            creator: this.props.username,
-        })
     }
 
     onChangeTitle(e) {
@@ -84,8 +82,9 @@ export default class createPost extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        console.log(this.state.creator);
         const post = {
-            creator: this.state.username,
+            creator: this.props.userStuff.username,
             title: this.state.title,
             nameA: this.state.nameA,
             oddsA: this.state.oddsA,
@@ -105,7 +104,7 @@ export default class createPost extends Component {
                     oddsB: '',
                     expiryDate: '',
                 });
-                this.props.setUser(this.props.username);
+                this.props.setUser(this.props.userStuff);
                 this.props.history.push('/home');
             })
             .catch((err)=>console.log(err));
@@ -113,9 +112,10 @@ export default class createPost extends Component {
     }
 
     render() {
+        //console.log(`username in createPost is ${this.state.creator}`);
         return (
             <form onSubmit={this.onSubmit}> 
-                <h1>Create a Betting Post!</h1>
+                <h1>you are about to create a betting post, {this.state.creator}</h1>
                 <label>Title:</label>
                 <input id="title-submit" type="text" value={this.state.title} onChange={this.onChangeTitle} />
                 <br />

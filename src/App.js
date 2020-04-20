@@ -43,15 +43,15 @@ export default class App extends React.Component {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email
-    }
+    };
       return (
         <Router>
           <Navbar/>
           <br/>
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
-          <Route path="/home" render={props => (<HomePage {...userStuff}/>)}></Route>
-          <Route path="/createpost" render={props => (<CreatePost {...userStuff}/>)}></Route>
+          <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
       );
   }
