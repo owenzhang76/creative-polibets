@@ -7,7 +7,20 @@ router.route('/edituser').post((req, res) => {
 
     console.log(req.body);
 
-  User.updateOne()
+    let userID = req.body.id;
+    let username = req.body.newUsername;
+    let firstname = req.body.newFirstname;
+    let lastname = req.body.newLastname;
+    let email = req.body.newEmail;
+
+    
+
+    User.findOneAndUpdate({_id: userID}, 
+        {username: username,
+         firstname: firstname,
+         lastname: lastname,
+         email: email
+        })
     .then(() => res.json('User updated!'))
     .catch(err => res.status(400).json('Error: ' + err))
     

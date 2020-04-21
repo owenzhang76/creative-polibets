@@ -35,7 +35,7 @@ export default class UserProfile extends Component {
             //     email: this.props.userStuff.email
             // });
 
-           // console.log(this.state);
+            console.log(this.state);
 
         }
 
@@ -83,26 +83,39 @@ export default class UserProfile extends Component {
             newLastname: this.state.lastname,
             newEmail: this.state.email
         }
+
         console.log("fuck me in the pussy");
         console.log(updateUser);
         
         axios.post('http://localhost:5000/users/edituser', updateUser)
-            .then(res => console.log(res.data))
+        .then(res => {
+            console.log(res.data);
+          
+            this.setState({
+                username: "",
+                password: "",
+                firstname: "",
+                lastname: "",
+                email: ""
+            });
+            this.props.setUser(res.data);
+            //this.props.history.push('/home');
+        })
             .catch((err)=>console.log(err));
         
             this.setState({
-                username: '',
-                password: '',
-                firstname: '',
-                lastname: '',
-                email: ''
+                username: this.state.username,
+                password: this.state.password,
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
+                email: this.state.email
             });
     }
 
 
+  
 
     render() {
-
       //  console.log(this.props.userStuff.username);
 
         return (

@@ -27,6 +27,21 @@ export default class App extends React.Component {
 
   
 
+updateUser(user) {
+  console.log("inside updateUser function in App.js")
+  console.log(user);
+
+  this.setState({
+    loggedIn: true,
+    id: user['_id'],
+    username: user['username'],
+    firstname: user['firstname'],
+    lastname: user['lastname'],
+    email: user['email'],
+  });
+
+}
+
   setUser(user) {
     console.log("inside setUser function");
     console.log(user);
