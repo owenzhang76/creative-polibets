@@ -38,15 +38,16 @@ router.route('/create').post((req, res) => {
 
     console.log(newPost);
 
-    newPost.save(function(err, user) {
-        if (err) {
-            throw (err);
-        } else {
-            console.log('no error');
-            console.log(user);
-            return user;
-        }
-    })
+    // newPost.save(function(err, user) {
+    //     if (err) {
+    //         throw (err);
+    //     } else {
+    //         console.log('no error');
+    //         console.log(user);
+    //         //return user;
+    //     }
+    // })
+    newPost.save()
     .then(() => res.json("new post added"))
     .catch(err => res.status(400).json('Error: ' + err))
 });
