@@ -35,8 +35,6 @@ router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-   
-
     let checkUser = new User ({
         username: username,
         password: password,

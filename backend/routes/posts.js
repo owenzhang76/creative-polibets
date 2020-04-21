@@ -4,6 +4,7 @@ let Post = require('../models/postModel');
 
 router.route('/').get((req, res) => {
     console.log("Inside /posts get");
+
     Post.find({})
     .then(function(posts) {
         console.log(posts);
@@ -11,7 +12,6 @@ router.route('/').get((req, res) => {
     }) 
     .then((data) => {res.json(data)})
     .catch(err => res.status(400).json('Error: ' + err))
-
 })
 
 router.route('/create').post((req, res) => {
@@ -37,19 +37,15 @@ router.route('/create').post((req, res) => {
     });
 
     console.log(newPost);
-
-    // newPost.save(function(err, user) {
-    //     if (err) {
-    //         throw (err);
-    //     } else {
-    //         console.log('no error');
-    //         console.log(user);
-    //         //return user;
-    //     }
-    // })
+    
     newPost.save()
     .then(() => res.json("new post added"))
     .catch(err => res.status(400).json('Error: ' + err))
+});
+
+router.route('/placebet').post((req, res) => {
+    console.log('inside /posts/placbet post');
+    // finish this route, and add #betA & #betB
 });
 
 module.exports = router;
