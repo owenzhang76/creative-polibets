@@ -6,6 +6,7 @@ export default class registerForm extends Component {
     constructor(props) {
         super(props);
         
+        this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeFirstname = this.onChangeFirstname.bind(this);
@@ -40,6 +41,12 @@ export default class registerForm extends Component {
             username: e.target.value
         })
     };
+
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value
+        })
+    };
     
     onChangeEmail(e) {
         this.setState({
@@ -64,7 +71,9 @@ export default class registerForm extends Component {
         e.preventDefault();
 
         const updateUser = {
+            id: this.props.userStuff.id,
             newUsername: this.state.username,
+            newPassword: this.state.password,
             newFirstname: this.state.firstname,
             newLastname: this.state.lastname,
             newEmail: this.state.email
@@ -78,6 +87,7 @@ export default class registerForm extends Component {
         
             this.setState({
                 username: '',
+                password: '',
                 firstname: '',
                 lastname: '',
                 email: ''
@@ -92,7 +102,7 @@ export default class registerForm extends Component {
 
         return (
             
-            <form>
+            <form onSubmit={this.onSubmit}>
                 <h1>Current User Info</h1>
                 <h3>Username: {this.props.userStuff.username}</h3>
                 <h3>Email: {this.props.userStuff.email}</h3>
@@ -106,6 +116,9 @@ export default class registerForm extends Component {
                
                 <label>Username:</label>
                 <input id="username-submit" type="text" value={this.state.username} onChange={this.onChangeUsername} />
+                <br />
+                <label>Password:</label>
+                <input id="password-submit" type="text" value={this.state.password} onChange={this.onChangePassword} />
                 <br />
                 <label>Email:</label>
                 <input id="email-submit" type="text" value={this.state.email} onChange={this.onChangeEmail} />

@@ -36,6 +36,10 @@ export default class App extends React.Component {
       lastname: user['lastname'],
       email: user['email'],
     });
+
+   
+
+
     //window.location.href='/home';
   }
 
@@ -48,6 +52,9 @@ export default class App extends React.Component {
       lastname: this.state.lastname,
       email: this.state.email
     };
+
+
+    console.log(`####${userStuff}`);
       return (
         <Router>
           <Navbar/>
