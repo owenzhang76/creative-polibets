@@ -14,6 +14,7 @@ export default class registerForm extends Component {
 
         this.state = {
             username: '',
+            password: '',
             email: '',
             firstname: '',
             lastname: '',
@@ -22,12 +23,13 @@ export default class registerForm extends Component {
 
     componentDidMount() {
             console.log("user profile did mount");
-            this.setState({
-                username: this.props.username,
-                firstname: this.props.firstname,
-                lastname: this.props.lastname,
-                email: this.props.email
-            });
+            console.log(this.props.userStuff);
+            // this.setState({
+            //     username: this.props.username,
+            //     firstname: this.props.firstname,
+            //     lastname: this.props.lastname,
+            //     email: this.props.email
+            // });
 
         }
 
@@ -58,37 +60,52 @@ export default class registerForm extends Component {
     };
 
     onSubmit(e) {
+        
         e.preventDefault();
-        const user = {
-            username: this.props.username,
-            firstname: this.props.firstname,
-            lastname: this.props.lastname,
-            email: this.props.email
+
+        const updateUser = {
+            newUsername: this.state.username,
+            newFirstname: this.state.firstname,
+            newLastname: this.state.lastname,
+            newEmail: this.state.email
         }
-        console.log(user);
-        axios.post('http://localhost:5000/users/register', user)
+        console.log("fuck me in the pussy");
+        console.log(updateUser);
+        
+        axios.post('http://localhost:5000/users/edituser', updateUser)
             .then(res => console.log(res.data))
             .catch((err)=>console.log(err));
         
             this.setState({
-                username: this.props.username,
-                firstname: this.props.firstname,
-                lastname: this.props.lastname,
-                email: this.props.email
+                username: '',
+                firstname: '',
+                lastname: '',
+                email: ''
             });
     }
 
 
+
     render() {
+
+      //  console.log(this.props.userStuff.username);
+
         return (
-            <div>
-                <form>
-                <h1>Edit Your User Info</h1>
+            
+            <form>
+                <h1>Current User Info</h1>
+                <h3>Username: {this.props.userStuff.username}</h3>
+                <h3>Email: {this.props.userStuff.email}</h3>
+                <h3>Firstname: {this.props.userStuff.firstname}</h3>
+                <h3>Lastname: {this.props.userStuff.lastname}</h3>
+                <br>
+                </br>
+
+                <h1>Edit User Info</h1>
+
+               
                 <label>Username:</label>
-                <input id="username-submit" type="text" value={this.props.userStuff.username} onChange={this.onChangeUsername} />
-                <br />
-                <label>Password:</label>
-                <input id="password-submit" type="text" value={this.state.password} onChange={this.onChangePassword} />
+                <input id="username-submit" type="text" value={this.state.username} onChange={this.onChangeUsername} />
                 <br />
                 <label>Email:</label>
                 <input id="email-submit" type="text" value={this.state.email} onChange={this.onChangeEmail} />
@@ -99,9 +116,9 @@ export default class registerForm extends Component {
                 <label>Lastname:</label>
                 <input id="lastname-submit" type="text" value={this.state.lastname} onChange={this.onChangeLastname} />
                 <br />
-                <input id="login-submit" type="submit" />
+                <input id="update-submit" type="submit" />
                 </form>
-            </div>
+            
         );
     }
 }

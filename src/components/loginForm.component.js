@@ -38,6 +38,7 @@ export default class loginForm extends Component {
             password: this.state.password,
         }
         console.log(user);
+        console.log("just testing how stuff works");
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 console.log(res.data);

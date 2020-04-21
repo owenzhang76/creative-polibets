@@ -5,6 +5,7 @@ export default class homepage extends Component {
     constructor(props) {
         super(props);
         this.goToCreatePost = this.goToCreatePost.bind(this);
+        this.goToUserProfile = this.goToUserProfile.bind(this);
         this.state = {
             username: '',
             email: '',
@@ -17,6 +18,7 @@ export default class homepage extends Component {
     componentDidMount() {
         console.log("homepage did mount");
         console.log(this.state.username);
+        console.log(this.props.userStuff);
         this.setState({
             username: this.props.userStuff.username,
             firstname: this.props.userStuff.firstname,
@@ -41,6 +43,18 @@ export default class homepage extends Component {
         this.props.history.push('/createpost')
     }
 
+    goToUserProfile(e) {
+        e.preventDefault();
+        const userStuff = {
+            username: this.state.username,
+            email: this.state.email,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+        }
+        this.props.setUser(userStuff);
+        this.props.history.push('/userprofile')
+    }
+
     render() {
        
         console.log("rendering home page");
@@ -51,6 +65,7 @@ export default class homepage extends Component {
             <p>{this.state.username}</p>
             {/* <form onSubmit={this.goToCreatePost}> */}
                 <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
+                <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button>
             {/* </form> */}
         </div>
         );

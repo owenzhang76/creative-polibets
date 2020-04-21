@@ -2,6 +2,19 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 let User = require('../models/userModel');
 
+router.route('/edituser').post((req, res) => {
+    console.log("Inside /users/edituser Post");
+
+    console.log(req.body);
+
+  User.updateOne()
+    .then(() => res.json('User updated!'))
+    .catch(err => res.status(400).json('Error: ' + err))
+    
+    
+});
+
+
 router.route('/register').post((req, res) => {
     console.log("Inside /users/register Post");
         

@@ -17,7 +17,8 @@ export default class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.state = {
       loggedIn: false,
-      username: "",
+      id: '',
+      username: '',
       firstname: '',
       lastname: '',
       email: '',
@@ -29,6 +30,7 @@ export default class App extends React.Component {
     console.log(user);
     this.setState({
       loggedIn: true,
+      id: user['id'],
       username: user['username'],
       firstname: user['firstname'],
       lastname: user['lastname'],
@@ -40,6 +42,7 @@ export default class App extends React.Component {
   render () {
     const userStuff = {
       loggedIn: this.state.loggedIn,
+      id: this.state.id,
       username: this.state.username,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -53,9 +56,7 @@ export default class App extends React.Component {
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
           <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
-          <Route path="/userprofile" render={props => (<UserProfile {...props}userStuff={userStuff}/>)}></Route>
-          <Route path="/home" render={props => (<HomePage {...userStuff}/>)}></Route>
-          <Route path="/createpost" render={props => (<CreatePost {...userStuff}/>)}></Route>
+          <Route path="/userprofile" render={props => (<UserProfile {...props}setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
       );
   }
