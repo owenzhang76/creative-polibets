@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-export default class registerForm extends Component {
+export default class UserProfile extends Component {
     constructor(props) {
         super(props);
-        
+
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -14,6 +15,7 @@ export default class registerForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            id: '',
             username: '',
             password: '',
             email: '',
@@ -26,11 +28,14 @@ export default class registerForm extends Component {
             console.log("user profile did mount");
             console.log(this.props.userStuff);
             // this.setState({
-            //     username: this.props.username,
-            //     firstname: this.props.firstname,
-            //     lastname: this.props.lastname,
-            //     email: this.props.email
+            //     id: this.props.userStuff.id,
+            //     username: this.props.userStuff.username,
+            //     firstname: this.props.userStuff.firstname,
+            //     lastname: this.props.userStuff.lastname,
+            //     email: this.props.userStuff.email
             // });
+
+           // console.log(this.state);
 
         }
 

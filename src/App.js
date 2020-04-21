@@ -25,26 +25,50 @@ export default class App extends React.Component {
     };
   };
 
+  
+
   setUser(user) {
     console.log("inside setUser function");
     console.log(user);
+
     this.setState({
       loggedIn: true,
-      id: user['id'],
+      id: user['_id'],
       username: user['username'],
       firstname: user['firstname'],
       lastname: user['lastname'],
       email: user['email'],
     });
 
-   
+    console.log("inside setUser function testing state");
+    console.log(this.state);
 
-
-    //window.location.href='/home';
   }
 
+  getUser() {
+    console.log("inside get user fuinction! (state)")
+    console.log(this.state);
+    const currentUser = {
+      loggedIn: this.state.loggedIn,
+      id: this.state.id,
+      username: this.state.username,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+    }
+    console.log("inside get user, currentUser");
+    console.log(currentUser);
+  }
+
+
+
+
+
   render () {
-    const userStuff = {
+    console.log("inside render testing state");
+    console.log(this.state);
+
+    let userStuff = {
       loggedIn: this.state.loggedIn,
       id: this.state.id,
       username: this.state.username,
@@ -53,8 +77,9 @@ export default class App extends React.Component {
       email: this.state.email
     };
 
+    console.log("####");
+   console.log(userStuff);
 
-    console.log(`####${userStuff}`);
       return (
         <Router>
           <Navbar/>
