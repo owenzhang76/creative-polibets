@@ -11,7 +11,9 @@ export default class homepage extends Component {
             email: '',
             firstname: '',
             lastname: '',
+            posts: [],
         };
+        
        
     };
 
@@ -20,15 +22,30 @@ export default class homepage extends Component {
         console.log(this.state.username);
         console.log(this.props.userStuff);
         this.setState({
-            username: this.props.userStuff.username,
-            firstname: this.props.userStuff.firstname,
-            lastname: this.props.userStuff.lastname,
-            email: this.props.userStuff.email
-        });
-        // axios.get('http://localhost:5000/posts')
-        //     .then(res => {
-        //         console.log(res.data);
-        //     })
+            username: this.props.userStuff.username
+        })
+        axios.get('http://localhost:5000/posts/')
+            .then(res => {
+                //console.log(res.data);
+                res.data.forEach(post => {
+                    this.setState({
+                        posts: [...this.state.posts, post]
+                    })
+                });
+                // this.setState({
+                //     posts: res.data
+                // })
+                // res.data.forEach(post => {
+                //     this.setState({
+                //         posts: post.
+                //     })
+                //     // this.state.posts.push(post);
+                // });
+            })
+            .then(() => {
+                console.log(this.state.posts);
+            })
+            .catch((err)=>console.log(err));
     }
     
     goToCreatePost(e) {
@@ -56,17 +73,48 @@ export default class homepage extends Component {
     }
 
     render() {
-       
         console.log("rendering home page");
-        // console.log(this.state.username);
+        // const containerStyle = {
+        //     border: solid 2px dark,
+
+        // }
         return (
+            
         <div>
             <h3>"And I say, thou shalt bet. Thou shalt bravely gamble all yer wee possessions!</h3>
             <p>{this.state.username}</p>
-            {/* <form onSubmit={this.goToCreatePost}> */}
-                <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
-                <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button>
-            {/* </form> */}
+            {this.state.posts.map((post, index) => {
+                console.log(post.title, post.nameA);
+                return(
+                    <div class="post-container" id={post.id}>
+                        <div class="post-title-container">{post.title}</div>
+                        <div class="post-choices-container">
+                        <div id="post-a-container">
+                            <div class="a">{post.nameA}</div>
+                            <div >{post.oddsA}</div>  
+                        </div>
+                        <div id="post-b-container">
+                            <div class="b">{post.nameB}</div>
+                            <div class="annoying-bitch">{post.oddsB}</div>
+                        </div>
+                        </div>
+                    </div>
+                )
+            })}
+            <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
+                {/* // console.log(
+                //     `title: ${title},
+                //      nameA: ${nameA},
+                //      oddsA: ${oddsA},
+                //      nameB: ${nameB},
+                //      oddsB: ${oddsB},
+                //     `
+        
+                // );
+                // // console.log(title, nameA, oddsA, nameB, oddsB, date);
+                // return(
+                // <div>{title, nameA, oddsA, nameB, oddsB, date}</div>
+                // ); */}
         </div>
         );
     };

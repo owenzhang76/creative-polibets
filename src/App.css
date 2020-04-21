@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.post-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 700;
+}
+
+.post-choices-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-b-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.annoying-bitch {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.a {
+  color: blue;
+  font-weight: 600;
+}
+
+.b {
+  color: red;
+  font-weight: 600;
+}

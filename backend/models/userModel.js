@@ -35,20 +35,6 @@ const userSchema = new Schema({
         required: true,
         trim: true,
     }
-    // password: {
-    //     type: String,
-    //     required: true
-    // },
-
-    // eCurrency: {
-    //     type: Number,
-    //     required: true
-    // },
-
-    // postsTouched: {
-    //     type: Object
-    // }
-
 });
 
 userSchema.methods.generateHash = function(password) {
