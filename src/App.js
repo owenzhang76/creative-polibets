@@ -54,8 +54,6 @@ export default class App extends React.Component {
           <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/userprofile" render={props => (<UserProfile {...props}userStuff={userStuff}/>)}></Route>
-          <Route path="/home" render={props => (<HomePage {...userStuff}/>)}></Route>
-          <Route path="/createpost" render={props => (<CreatePost {...userStuff}/>)}></Route>
         </Router>
       );
   }

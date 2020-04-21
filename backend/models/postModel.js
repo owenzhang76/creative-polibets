@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
+    creator: {
+        type: String, 
+        required: true, 
+    },
     title: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minLength: 3
     },
