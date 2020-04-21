@@ -59,20 +59,34 @@ export default class homepage extends Component {
 
     render() {
         console.log("rendering home page");
-        //console.log(this.state);
-        // console.log(this.state.username);
+        // const containerStyle = {
+        //     border: solid 2px dark,
+
+        // }
         return (
+            
         <div>
             <h3>"And I say, thou shalt bet. Thou shalt bravely gamble all yer wee possessions!</h3>
             <p>{this.state.username}</p>
-            <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
             {this.state.posts.map((post, index) => {
                 console.log(post.title, post.nameA);
                 return(
-                    <div>
+                    <div class="post-container" id={post.id}>
+                        <div class="post-title-container">{post.title}</div>
+                        <div class="post-choices-container">
+                        <div id="post-a-container">
+                            <div class="a">{post.nameA}</div>
+                            <div >{post.oddsA}</div>  
+                        </div>
+                        <div id="post-b-container">
+                            <div class="b">{post.nameB}</div>
+                            <div class="annoying-bitch">{post.oddsB}</div>
+                        </div>
+                        </div>
                     </div>
                 )
             })}
+            <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
                 {/* // console.log(
                 //     `title: ${title},
                 //      nameA: ${nameA},
