@@ -7,11 +7,11 @@ router.route('/edituser').post((req, res) => {
 
     console.log(req.body);
 
-    let userID = req.body.id;
-    let username = req.body.newUsername;
-    let firstname = req.body.newFirstname;
-    let lastname = req.body.newLastname;
-    let email = req.body.newEmail;
+    let userID = req.body._id;
+    let username = req.body.username;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let email = req.body.email;
 
     
 

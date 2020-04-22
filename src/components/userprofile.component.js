@@ -6,6 +6,7 @@ export default class UserProfile extends Component {
     constructor(props) {
         super(props);
 
+        this.goHome = this.goHome.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -35,9 +36,13 @@ export default class UserProfile extends Component {
             //     email: this.props.userStuff.email
             // });
 
-            console.log(this.state);
+           
 
         }
+
+    goHome() {
+        this.props.history.push('/home');
+    }
 
     
 
@@ -76,12 +81,12 @@ export default class UserProfile extends Component {
         e.preventDefault();
 
         const updateUser = {
-            id: this.props.userStuff.id,
-            newUsername: this.state.username,
-            newPassword: this.state.password,
-            newFirstname: this.state.firstname,
-            newLastname: this.state.lastname,
-            newEmail: this.state.email
+            _id: this.props.userStuff.id,
+            username: this.state.username,
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email
         }
 
         console.log("fuck me in the pussy");
@@ -98,18 +103,18 @@ export default class UserProfile extends Component {
                 lastname: "",
                 email: ""
             });
-            this.props.setUser(res.data);
-            //this.props.history.push('/home');
+            this.props.updateUser(updateUser);
+            this.props.history.push('/home');
         })
-            .catch((err)=>console.log(err));
+        .catch((err)=>console.log(err));
         
-            this.setState({
-                username: this.state.username,
-                password: this.state.password,
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
-                email: this.state.email
-            });
+            // this.setState({
+            //     username: this.state.username,
+            //     password: this.state.password,
+            //     firstname: this.state.firstname,
+            //     lastname: this.state.lastname,
+            //     email: this.state.email
+            // });
     }
 
 
@@ -148,6 +153,7 @@ export default class UserProfile extends Component {
                 <input id="lastname-submit" type="text" value={this.state.lastname} onChange={this.onChangeLastname} />
                 <br />
                 <input id="update-submit" type="submit" />
+                <button id="go-to-homepage-button" onClick={this.goHome}>Home</button>
                 </form>
             
         );

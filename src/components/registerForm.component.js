@@ -72,7 +72,11 @@ export default class registerForm extends Component {
         }
         console.log(user);
         axios.post('http://localhost:5000/users/register', user)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data);
+                this.props.history.push('/login');
+
+            })
             .catch((err)=>console.log(err));
         
         this.setState({

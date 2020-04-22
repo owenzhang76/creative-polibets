@@ -167,7 +167,7 @@ export default class homepage extends Component {
                     );
                 })}
                 <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
-                <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button> 
+                <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button>
             </div>
             );
     };
