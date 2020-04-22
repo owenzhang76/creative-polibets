@@ -28,20 +28,19 @@ export default class App extends React.Component {
 
   
 
-updateUser(user) {
-  console.log("inside updateUser function in App.js")
-  console.log(user);
+  updateUser(user) {
+    console.log("inside updateUser function in App.js")
+    console.log(user);
 
-  this.setState({
-    loggedIn: true,
-    id: user['_id'],
-    username: user['username'],
-    firstname: user['firstname'],
-    lastname: user['lastname'],
-    email: user['email'],
-  });
-
-}
+    this.setState({
+      loggedIn: true,
+      id: user['_id'],
+      username: user['username'],
+      firstname: user['firstname'],
+      lastname: user['lastname'],
+      email: user['email'],
+    });
+  }
 
   setUser(user) {
     console.log("inside setUser function");
@@ -76,10 +75,6 @@ updateUser(user) {
   //   console.log(currentUser);
   // }
 
-
-
-
-
   render () {
     console.log("inside render testing state");
     console.log(this.state);
@@ -94,7 +89,7 @@ updateUser(user) {
     };
 
     console.log("####");
-   console.log(userStuff);
+    console.log(userStuff);
 
       return (
         <Router>
@@ -104,7 +99,7 @@ updateUser(user) {
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
           <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
-          <Route path="/userprofile" render={props => (<UserProfile {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/userprofile" render={props => (<UserProfile {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
       );
   }
