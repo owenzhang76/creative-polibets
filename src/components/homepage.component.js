@@ -171,5 +171,4 @@ export default class homepage extends Component {
             </div>
             );
     };
-
 }
