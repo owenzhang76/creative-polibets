@@ -7,6 +7,7 @@ const postSchema = new Schema({
         type: String, 
         required: true, 
     },
+
     title: {
         type: String,
         required: true,
@@ -39,7 +40,11 @@ const postSchema = new Schema({
         required: true
     },
 
-    numberOfBets: {
+    numberOfBetsA: {
+        type: Number,
+    },
+
+    numberOfBetsB: {
         type: Number,
     },
     

@@ -33,7 +33,8 @@ router.route('/create').post((req, res) => {
         nameB: nameB,
         oddsB: oddsB,
         expiryDate: expiryDate,
-        numberOfBets: 0
+        numberOfBetsA: 0,
+        numberOfBetsB: 0
     });
 
     console.log(newPost);

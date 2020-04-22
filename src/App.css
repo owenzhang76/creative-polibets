@@ -50,7 +50,6 @@
 .post-title-container {
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
   justify-content: space-between;
   font-size: larger;
   font-weight: 700;
@@ -70,6 +69,12 @@
   align-items: flex-end;
 }
 
+.post-a-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
 .annoying-bitch {
   display: flex;
   flex-direction: column;
@@ -78,13 +83,23 @@
 }
 
 .a {
-  color: blue;
+  color: #90afc5;
   font-weight: 600;
 }
 
 .b {
-  color: red;
+  color: #f67280;
+  display: flex;
   font-weight: 600;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.button-b {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .creator {
@@ -94,4 +109,62 @@
   font-size: small;
   font-weight: 300;
   font-style: italic;
+}
+
+.bitch-container {
+  display: flex;
+  justify-content: center;
+}
+
+.empty-div{
+  width: 300px;
+}
+
+.vs-bar-container {
+  display: flex;
+}
+
+.bar-outline {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 4;
+  width: 600px;
+  height: 20px;
+  border: 1px solid grey;
+}
+
+.bar-a {
+  width: 100px;
+  background-color: #90afc5 ;
+}
+
+.bar-b {
+  width: 500px;
+  background-color: #f67280;
+}
+
+.button-a{
+  width: 100px;
+}
+
+.button-b{
+  display: flex;
+  justify-content: flex-start;
+  width: 100px;
+}
+
+.post-b-container {
+  width: 300px;
+  display: flex;
+}
+
+.creator-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 300px;
+}
+
+.title {
+  color: #505160
 }
