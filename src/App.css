@@ -37,6 +37,12 @@
   }
 }
 
+.welcome-message {
+  color: #505160;
+  display: flex;
+  justify-content: center;
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
@@ -122,6 +128,7 @@
 
 .vs-bar-container {
   display: flex;
+  flex-direction: column;
 }
 
 .bar-outline {
@@ -134,12 +141,12 @@
 }
 
 .bar-a {
-  width: 100px;
+  /* width: 100px; */
   background-color: #90afc5 ;
 }
 
 .bar-b {
-  width: 500px;
+  /* width: 500px; */
   background-color: #f67280;
 }
 
@@ -167,4 +174,10 @@
 
 .title {
   color: #505160
+}
+
+.number-bets-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

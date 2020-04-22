@@ -6,6 +6,7 @@ export default class homepage extends Component {
         super(props);
         this.goToCreatePost = this.goToCreatePost.bind(this);
         this.placeBet = this.placeBet.bind(this);
+        this.calculateWidth = this.calculateWidth.bind(this);
         this.state = {
             username: '',
             email: '',
@@ -57,14 +58,46 @@ export default class homepage extends Component {
         // axios.post('http://localhost:5000/posts/placebet')
     }
 
+    calculateWidth(a, b) {
+        let oneSlice;
+        if (a == 0 && b == 0) { 
+            oneSlice = 0;
+        } else {
+            oneSlice = 600/(a+b);
+        }
+        return oneSlice;
+    }
+
     render() {
         console.log("rendering home page");
         return (
             <div>
-                <h3>"And I say, thou shalt bet. Thou shalt bravely gamble all yer wee possessions!</h3>
-                <p>logged in as {this.state.username}</p>
+                 <p>logged in as {this.state.username}</p>
+                <h3 class="welcome-message">"And I say, thou shalt bet. Thou shalt bravely gamble all yer wee possessions!"</h3>
                 {this.state.posts.map((post, index) => {
-                    console.log(post.title, post.nameA);
+                    let slice = this.calculateWidth(post.numberOfBetsA, post.numberOfBetsB);
+                    let widthA = slice*post.numberOfBetsA;
+                    let widthB = slice*post.numberOfBetsB;
+                    console.log(slice);
+                    if (widthA == 0 && widthB == 0) {
+                        widthA = 300;
+                        widthB = 300;
+                    } else if (widthA == 0 && widthB != 0) {
+                        widthA = 0;
+                        widthB = 600;
+                    } else if (widthA != 0 && widthB == 0){
+                        widthA = 600;
+                        widthB = 0;
+                    } else {
+                        console.log('yeet');
+                    }
+                    console.log(widthA, widthB);
+                    const aStyle = {
+                        width: widthA
+                    };
+                    const bStyle = {
+                        width: widthB
+                    };
                     return(
                         <div class="post-container" id={post.id}>
 
@@ -83,9 +116,13 @@ export default class homepage extends Component {
                                     <button class="button-a" id="button-a" value="A" name={index} onClick={this.placeBet}>Bet</button>
                                 </div>
                                 <div class="vs-bar-container"> 
+                                    <div class="number-bets-container">
+                                        <div class="number-bets-a">{post.numberOfBetsA}</div>
+                                        <div class="number-bets-b">{post.numberOfBetsB}</div>
+                                    </div>
                                     <div class="bar-outline"> 
-                                        <div class="bar-a"></div>
-                                        <div class="bar-b"></div>
+                                        <div class="bar-a" style={aStyle}></div>
+                                        <div class="bar-b" style={bStyle}></div>
                                     </div>
                                 </div>
                                 <div class="post-b-container" id="post-b-container">
