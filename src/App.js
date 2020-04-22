@@ -99,7 +99,7 @@ export default class App extends React.Component {
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
           <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
-          <Route path="/userprofile" render={props => (<UserProfile {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/userprofile" render={props => (<UserProfile {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
       );
   }
