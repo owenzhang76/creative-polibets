@@ -6,6 +6,8 @@ export default class UserProfile extends Component {
     constructor(props) {
         super(props);
 
+        this.goToHomepage = this.goToHomepage.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -39,7 +41,11 @@ export default class UserProfile extends Component {
 
         }
 
-    
+        goToHomepage() {
+            console.log("inside go to home page button");
+            this.props.history.push('/home');
+        }
+       
 
     onChangeUsername(e) {
         this.setState({
@@ -148,6 +154,7 @@ export default class UserProfile extends Component {
                 <input id="lastname-submit" type="text" value={this.state.lastname} onChange={this.onChangeLastname} />
                 <br />
                 <input id="update-submit" type="submit" />
+                <button id="go-back-to-homepage-button" onClick={this.goToHomepage}>Homepage</button>
                 </form>
             
         );

@@ -6,6 +6,7 @@ export default class registerForm extends Component {
     constructor(props) {
         super(props);
         
+        this.goToLogin = this.goToLogin.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -21,6 +22,10 @@ export default class registerForm extends Component {
             lastname: '',
         }
     };
+
+    goToLogin() {
+        this.props.history.push('/login');
+    }
 
     componentDidMount() {
         // this.setState({
@@ -105,6 +110,7 @@ export default class registerForm extends Component {
                 <input id="lastname-submit" type="text" value={this.state.lastname} onChange={this.onChangeLastname} />
                 <br />
                 <input id="login-submit" type="submit" />
+                <button id="go-to-login-button" onClick={this.goToLogin}>Login</button>
             </form>
         );
     }

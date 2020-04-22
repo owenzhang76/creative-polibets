@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Navbar from "./components/navbar.component";
+
 import registerForm from "./components/registerForm.component";
 import HomePage from './components/homepage.component';
 import LoginForm from './components/loginForm.component';
@@ -97,7 +97,7 @@ updateUser(user) {
 
       return (
         <Router>
-          <Navbar/>
+         
           <br/>
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
