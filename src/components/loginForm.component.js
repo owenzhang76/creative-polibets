@@ -13,6 +13,7 @@ export default class loginForm extends Component {
         this.state = {
             username: '',
             password: '',
+            userId: '',
         }
     };
 
@@ -38,9 +39,16 @@ export default class loginForm extends Component {
             password: this.state.password,
         }
         console.log(user);
+        console.log("just testing how stuff works");
         axios.post('http://localhost:5000/users/login', user)
             .then(res => {
                 console.log(res.data);
+                this.setState({
+                    userId: res.data["_id"]
+                })
+                console.log("setting userId in login submit button");
+                console.log(this.state.userId);
+
                 this.setState({
                     username: "",
                     password: "",

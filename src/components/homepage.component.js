@@ -4,10 +4,13 @@ import axios from 'axios';
 export default class homepage extends Component {
     constructor(props) {
         super(props);
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.goToCreatePost = this.goToCreatePost.bind(this);
         this.placeBet = this.placeBet.bind(this);
         this.calculateWidth = this.calculateWidth.bind(this);
+        this.goToUserProfile = this.goToUserProfile.bind(this);
         this.state = {
+            id: '',
             username: '',
             email: '',
             firstname: '',
@@ -18,8 +21,14 @@ export default class homepage extends Component {
 
     componentDidMount() {
         console.log("homepage did mount");
+        console.log(this.state.username);
+        console.log(this.props.userStuff);
         this.setState({
-            username: this.props.userStuff.username
+            id: this.props.userStuff.id,
+            username: this.props.userStuff.username,
+            email: this.props.userStuff.email,
+            firstname: this.props.userStuff.firstname,
+            lastname: this.props.userStuff.lastname,
         })
         axios.get('http://localhost:5000/posts/')
             .then(res => {
@@ -37,12 +46,14 @@ export default class homepage extends Component {
     
     goToCreatePost(e) {
         e.preventDefault();
+        console.log("inside button for go to createpost")
         const userStuff = {
             username: this.state.username,
             email: this.state.email,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
         }
+        console.log(userStuff);
         this.props.setUser(userStuff);
         this.props.history.push('/createpost')
     }
@@ -68,12 +79,30 @@ export default class homepage extends Component {
         return oneSlice;
     }
 
+    goToUserProfile(e) {
+        
+        e.preventDefault();
+
+        console.log("inside button for go to user pro")
+        const userStuff = {
+            id: this.state.id,
+            username: this.state.username,
+            email: this.state.email,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+        }
+        // let cUser = this.getUser()
+        // console.log(cUser);
+       // this.props.setUser(userStuff);
+        this.props.history.push('/userprofile');
+    }
+
     render() {
         console.log("rendering home page");
         return (
             <div>
                  <p>logged in as {this.state.username}</p>
-                <h3 class="welcome-message">"And I say, thou shalt bet. Thou shalt bravely gamble all yer wee possessions!"</h3>
+                <h3 class="welcome-message">"And I say, thou shalt bet. Thou shalt bravely gamble away all yer wee possessions!"</h3>
                 {this.state.posts.map((post, index) => {
                     let slice = this.calculateWidth(post.numberOfBetsA, post.numberOfBetsB);
                     let widthA = slice*post.numberOfBetsA;
@@ -138,8 +167,9 @@ export default class homepage extends Component {
                     );
                 })}
                 <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
+                <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button> 
             </div>
-        );
+            );
     };
 
 }
