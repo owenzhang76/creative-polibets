@@ -121,10 +121,7 @@ export default class UserProfile extends Component {
   
 
     render() {
-      //  console.log(this.props.userStuff.username);
-
         return (
-            
             <form onSubmit={this.onSubmit}>
                 <h1>Current User Info</h1>
                 <h3>Username: {this.props.userStuff.username}</h3>

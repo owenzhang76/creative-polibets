@@ -9,6 +9,7 @@ import HomePage from './components/homepage.component';
 import LoginForm from './components/loginForm.component';
 import CreatePost from './components/createPost.component';
 import UserProfile from './components/userprofile.component';
+import PaymentButton from './components/paymentButton.component';
 
 export default class App extends React.Component {
 
@@ -95,6 +96,7 @@ export default class App extends React.Component {
         <Router>
          
           <br/>
+          <Route path="/paymentbuttontest" exact component={PaymentButton}></Route>
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
           <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>

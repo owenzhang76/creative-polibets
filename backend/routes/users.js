@@ -2,6 +2,8 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 let User = require('../models/userModel');
 
+
+
 router.route('/edituser').post((req, res) => {
     console.log("Inside /users/edituser Post");
 
