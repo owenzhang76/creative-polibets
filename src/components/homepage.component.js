@@ -21,8 +21,8 @@ export default class homepage extends Component {
 
     componentDidMount() {
         console.log("homepage did mount");
-        console.log(this.state.username);
-        console.log(this.props.userStuff);
+        //console.log(this.state.username);
+        //console.log(this.props.userStuff);
         this.setState({
             id: this.props.userStuff.id,
             username: this.props.userStuff.username,
@@ -60,13 +60,20 @@ export default class homepage extends Component {
 
     placeBet(e) {
         e.preventDefault();
+        console.log('Inside placebet frontend');
+        
         const bet = {
-            person: this.state.username,
-            option: e.target.value,
-            value: this.state.posts[e.target.name][`odds${e.target.value}`]
+            personId: this.state.id,
+            postId: this.state.posts[e.target.name]['_id'],
+            option: `numberOfBets${e.target.id}`,
+            optionName: e.target.value,
+            value: this.state.posts[e.target.name][`odds${e.target.id}`]
         }
         console.log(bet);
-        // axios.post('http://localhost:5000/posts/placebet')
+        axios.post('http://localhost:5000/posts/placebet', bet)
+            .then((res) => {
+                console.log(res);
+            })
     }
 
     calculateWidth(a, b) {
@@ -107,7 +114,6 @@ export default class homepage extends Component {
                     let slice = this.calculateWidth(post.numberOfBetsA, post.numberOfBetsB);
                     let widthA = slice*post.numberOfBetsA;
                     let widthB = slice*post.numberOfBetsB;
-                    console.log(slice);
                     if (widthA == 0 && widthB == 0) {
                         widthA = 300;
                         widthB = 300;
@@ -120,7 +126,7 @@ export default class homepage extends Component {
                     } else {
                         console.log('yeet');
                     }
-                    console.log(widthA, widthB);
+                    //console.log(widthA, widthB);
                     const aStyle = {
                         width: widthA
                     };
@@ -142,7 +148,7 @@ export default class homepage extends Component {
                                 <div class="post-a-container" id="post-a-container">
                                     <div class="a">{post.nameA}</div>
                                     <div>Odds: {post.oddsA > 0 ? `+${post.oddsA}` : post.oddsA}</div>  
-                                    <button class="button-a" id="button-a" value="A" name={index} onClick={this.placeBet}>Bet</button>
+                                    <button class="button-a" id="A" value={post.nameA} name={index} onClick={this.placeBet}>Bet</button>
                                 </div>
                                 <div class="vs-bar-container"> 
                                     <div class="number-bets-container">
@@ -158,7 +164,7 @@ export default class homepage extends Component {
                                     <div class="b">{post.nameB}</div>
                                     <div class="annoying-bitch">Odds: {post.oddsB > 0 ? `+${post.oddsB}` : post.oddsB}</div>
                                     <div class="bitch-container"> 
-                                        <button class="button-b" id="button-b" value="B" name={index} onClick={this.placeBet}>Bet</button>
+                                        <button class="button-b" id="B" value={post.nameB} name={index} onClick={this.placeBet}>Bet</button>
                                     </div>
                                 </div>
                             </div>

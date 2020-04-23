@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 let Post = require('../models/postModel');
+let User = require('../models/userModel');
 
 router.route('/').get((req, res) => {
     console.log("Inside /posts get");
@@ -46,7 +47,72 @@ router.route('/create').post((req, res) => {
 
 router.route('/placebet').post((req, res) => {
     console.log('inside /posts/placbet post');
-    // finish this route, and add #betA & #betB
+    
+    let personId = req.body.personId;
+    let postId = req.body.postId;
+    let option = req.body.option;
+    let value = req.body.value;
+
+    Post.findById({_id: postId}, function(err, post) {
+        if(err) {
+            console.log(`error: ${err}`);
+        } else if (!post) {
+            console.log(`error: Could not find post`);
+        } else {
+            console.log(`post found: ${post}`);
+            User.findOne({_id: personId}, function(err, user) {
+                if (err) {
+                    console.log(`error: ${err}`);
+                } else if (!user) {
+                    console.log(`error: Could not find user`);
+                } else {
+                    console.log(`user found: ${user}`);
+                    let betted = false;
+                    post.betters.forEach(better => {
+                        if (user._id == better._id) {
+                            console.log('you have already betted on this post');
+                            betted = true;
+                        }
+                    });
+                    if (!betted) {
+                        console.log('inside not betted');
+                        if (option == 'numberOfBetsA') {
+                            console.log('option is A');
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++, $push: {betters: personId}, })
+                        } else if (option == 'numberOfBetsB') {
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++, $push: {betters: personId}, })
+                            console.log('option is B');
+                        } else {
+                            console.log('option is undefined');
+                        }
+                    } else {
+                        console.log('inside betted');
+                        if (option == 'numberOfBetsA') {
+                            console.log('option is A');
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++}, function(err) {
+                                if (err) {
+                                    console.log(`error: ${err}`);
+                                } else {
+                                    res.json('post is updated!');
+                                }
+                            })
+                        } else if (option == 'numberOfBetsB') {
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++}, function(err) {
+                                if (err) {
+                                    console.log(`error: ${err}`);
+                                } else {
+                                    res.json('post is updated!');
+                                }
+                            })
+                            console.log('option is B');
+                        } else {
+                            console.log('option is undefined');
+                        }
+                    }
+                }
+            })
+        }
+    })
 });
 
 module.exports = router;

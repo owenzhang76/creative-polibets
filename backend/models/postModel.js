@@ -47,6 +47,11 @@ const postSchema = new Schema({
     numberOfBetsB: {
         type: Number,
     },
+
+    betters: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }],
     
 }, {
     timestamps: true
