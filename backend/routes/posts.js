@@ -69,7 +69,9 @@ router.route('/placebet').post((req, res) => {
                     console.log(`user found: ${user}`);
                     let betted = false;
                     post.betters.forEach(better => {
-                        if (user._id == better._id) {
+                        console.log(`better id: ${better._id}`);
+                        console.log(`user id: ${user._id}`);
+                        if (user._id.equals(better._id)) {
                             console.log('you have already betted on this post');
                             betted = true;
                         }
@@ -78,9 +80,33 @@ router.route('/placebet').post((req, res) => {
                         console.log('inside not betted');
                         if (option == 'numberOfBetsA') {
                             console.log('option is A');
-                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++, $push: {betters: personId}, })
+                            console.log(`numberOfBetsA is ${post.numberOfBetsA}`)
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA+1, $push: {betters: personId}}, function(err) {
+                                console.log('inside update');
+                                if (err) {
+                                    console.log(`error: ${err}`);
+                                } else {
+                                    console.log('here is the new post:');
+                                    Post.findById({_id: post.id}, function(err, post) {
+                                        console.log(post);
+                                    })
+                                    res.json('post is updated!');
+                                }
+                            })
                         } else if (option == 'numberOfBetsB') {
-                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++, $push: {betters: personId}, })
+                            console.log(`numberOfBetsB is ${post.numberOfBetsB}`);
+                            Post.update({_id: post._id}, {numberOfBetsB: post.numberOfBetsB+1, $push: {betters: personId}}, function(err) {
+                                console.log('inside update');
+                                if (err) {
+                                    console.log(`error: ${err}`);
+                                } else {
+                                    console.log('here is the new post:');
+                                    Post.findById({_id: post.id}, function(err, post) {
+                                        console.log(post);
+                                    })
+                                    res.json('post is updated!');
+                                }
+                            })
                             console.log('option is B');
                         } else {
                             console.log('option is undefined');
@@ -89,18 +115,30 @@ router.route('/placebet').post((req, res) => {
                         console.log('inside betted');
                         if (option == 'numberOfBetsA') {
                             console.log('option is A');
-                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++}, function(err) {
+                            console.log(`numberOfBetsA is ${post.numberOfBetsA}`);
+                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA+1}, function(err) {
+                                console.log('inside update');
                                 if (err) {
                                     console.log(`error: ${err}`);
                                 } else {
+                                    console.log('here is the new post:');
+                                    Post.findById({_id: post.id}, function(err, post) {
+                                        console.log(post);
+                                    })
                                     res.json('post is updated!');
                                 }
                             })
                         } else if (option == 'numberOfBetsB') {
-                            Post.update({_id: post._id}, {numberOfBetsA: post.numberOfBetsA++}, function(err) {
+                            console.log(`numberOfBetsB is ${post.numberOfBetsB}`)
+                            Post.update({_id: post._id}, {numberOfBetsB: post.numberOfBetsB+1}, function(err) {
+                                console.log('inside update');
                                 if (err) {
                                     console.log(`error: ${err}`);
                                 } else {
+                                    console.log('here is the new post:');
+                                    Post.findById({_id: post.id}, function(err, post) {
+                                        console.log(post);
+                                    })
                                     res.json('post is updated!');
                                 }
                             })

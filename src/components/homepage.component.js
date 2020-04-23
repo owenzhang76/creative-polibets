@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import update from 'react-addons-update';
 
 export default class homepage extends Component {
     constructor(props) {
@@ -9,6 +10,8 @@ export default class homepage extends Component {
         this.placeBet = this.placeBet.bind(this);
         this.calculateWidth = this.calculateWidth.bind(this);
         this.goToUserProfile = this.goToUserProfile.bind(this);
+        //this.manualOverload = this.manualOverload.bind(this);
+
         this.state = {
             id: '',
             username: '',
@@ -21,8 +24,6 @@ export default class homepage extends Component {
 
     componentDidMount() {
         console.log("homepage did mount");
-        //console.log(this.state.username);
-        //console.log(this.props.userStuff);
         this.setState({
             id: this.props.userStuff.id,
             username: this.props.userStuff.username,
@@ -69,12 +70,51 @@ export default class homepage extends Component {
             optionName: e.target.value,
             value: this.state.posts[e.target.name][`odds${e.target.id}`]
         }
+        let option = `numberOfBets${e.target.id}`;
         console.log(bet);
         axios.post('http://localhost:5000/posts/placebet', bet)
             .then((res) => {
                 console.log(res);
             })
+            .then( () => {
+                axios.get('http://localhost:5000/posts/')
+                .then(res => {
+                    this.setState({
+                        posts: []
+                     });
+                    res.data.forEach(post => {
+                        this.setState({
+                            posts: [...this.state.posts, post]
+                        })
+                    });
+                })
+                .then(() => {
+                    console.log(this.state.posts);
+                })
+                .catch((err)=>console.log(err));
+            })
+           
+                
+            
     }
+
+    // manualOverload() {
+    //     console.log('inside manual overload');
+    //     axios.get('http://localhost:5000/posts/')
+    //         .then(res => {
+    //             res.data.forEach(post => {
+    //                 this.setState({
+    //                     posts: [...this.state.posts, post]
+    //                 })
+    //             });
+    //         })
+    //         .then(() => {
+    //             console.log(this.state.posts);
+    //             //this.props.history.push('/home');
+    //             this.render();
+    //         })
+    //         .catch((err)=>console.log(err));
+    // }
 
     calculateWidth(a, b) {
         let oneSlice;
@@ -105,6 +145,19 @@ export default class homepage extends Component {
     }
 
     render() {
+        // axios.get('http://localhost:5000/posts/')
+        //     .then(res => {
+        //         res.data.forEach(post => {
+        //             this.setState({
+        //                 posts: [...this.state.posts, post]
+        //             })
+        //         });
+        //     })
+        //     .then(() => {
+        //         console.log(this.state.posts);
+        //     })
+        //     .catch((err)=>console.log(err));
+        
         console.log("rendering home page");
         return (
             <div>
