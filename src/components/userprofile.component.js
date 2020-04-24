@@ -23,12 +23,21 @@ export default class UserProfile extends Component {
             email: '',
             firstname: '',
             lastname: '',
+            wubucks: '',
         }
     };
 
     componentDidMount() {
             console.log("user profile did mount");
-            console.log(this.props.userStuff);
+            //console.log(this.props.userStuff);
+            this.setState({
+                id: this.props.userStuff.id,
+                username: this.props.userStuff.username,
+                email: this.props.userStuff.email,
+                firstname: this.props.userStuff.firstname,
+                lastname: this.props.userStuff.lastname,
+                wubucks: this.props.userStuff.wubucks,
+            })
             // this.setState({
             //     id: this.props.userStuff.id,
             //     username: this.props.userStuff.username,
@@ -46,6 +55,8 @@ export default class UserProfile extends Component {
     }
 
     goToCheckout() {
+        //pass in user info 
+        //this.props.setUser(this.props.userStuff)
         this.props.history.push('/checkout');
     }
 
@@ -91,7 +102,8 @@ export default class UserProfile extends Component {
             password: this.state.password,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            email: this.state.email
+            email: this.state.email,
+            wubucks: this.state.wubucks
         }
 
         console.log("fuck me in the pussy");
@@ -126,6 +138,7 @@ export default class UserProfile extends Component {
   
 
     render() {
+        console.log(this.state);
         return (
             <form onSubmit={this.onSubmit}>
                 <h1>Current User Info</h1>

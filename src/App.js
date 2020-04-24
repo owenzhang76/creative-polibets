@@ -2,8 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
 import registerForm from "./components/registerForm.component";
 import HomePage from './components/homepage.component';
 import LoginForm from './components/loginForm.component';
@@ -19,9 +17,6 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
-
-    
-
     this.setUser = this.setUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.state = {
@@ -31,12 +26,9 @@ export default class App extends React.Component {
       firstname: '',
       lastname: '',
       email: '',
+      wubucks: '',
     };
   };
-
-  
-  
-
 
   updateUser(user) {
     console.log("inside updateUser function in App.js")
@@ -49,6 +41,7 @@ export default class App extends React.Component {
       firstname: user['firstname'],
       lastname: user['lastname'],
       email: user['email'],
+      wubucks: user['wubucks'],
     });
   }
 
@@ -63,27 +56,13 @@ export default class App extends React.Component {
       firstname: user['firstname'],
       lastname: user['lastname'],
       email: user['email'],
+      wubucks: user['wubucks'],
     });
 
     console.log("inside setUser function testing state");
     console.log(this.state);
 
   }
-
-  // getUser() {
-  //   console.log("inside get user fuinction! (state)")
-  //   console.log(this.state);
-  //   const currentUser = {
-  //     loggedIn: this.state.loggedIn,
-  //     id: this.state.id,
-  //     username: this.state.username,
-  //     firstname: this.state.firstname,
-  //     lastname: this.state.lastname,
-  //     email: this.state.email,
-  //   }
-  //   console.log("inside get user, currentUser");
-  //   console.log(currentUser);
-  // }
 
   render () {
     
@@ -96,7 +75,8 @@ export default class App extends React.Component {
       username: this.state.username,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      email: this.state.email
+      email: this.state.email,
+      wubucks: this.state.wubucks
     };
 
     console.log("####");

@@ -101,14 +101,28 @@ router.route('/register').post((req, res) => {
         password: password,
         email: email,
         firstname: firstname,
-        lastname: lastname
+        lastname: lastname,
+        wubucks: 5000
     });
 
     console.log(newUser);
 
-    newUser.save()
-        .then(() => res.json('New user added!'))
-        .catch(err => res.status(400).json('Error: ' + err))
+
+    
+    newUser.save(function(err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('no error');
+            return user;
+        }
+    })
+    // .then((user) => res.json('New user added!'))
+    // .catch(err => res.status(400).json('Error: ' + err))
+
+    // newUser.save()
+    //     .then(() => res.json('New user added!'))
+    //     .catch(err => res.status(400).json('Error: ' + err))
 });
 
 router.route('/login').post((req, res) => {
@@ -146,5 +160,16 @@ router.route('/login').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err))
 });
 
+router.route(('/updatebalance')).post((req, res) => {
+    let id = req.body.id;
+    let currencyAdd = req.body.currencyAdd;
 
+    User.findOneAndUpdate({_id: id}, {
+       $inc: {
+           wubucks: 500,
+       }
+    })
+    .then(() => res.json('Added currency to user!'))
+    .catch(err => res.status(400).json('Error: ' + err))
+})
 module.exports = router;

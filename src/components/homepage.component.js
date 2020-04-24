@@ -30,6 +30,7 @@ export default class homepage extends Component {
             email: this.props.userStuff.email,
             firstname: this.props.userStuff.firstname,
             lastname: this.props.userStuff.lastname,
+            wubucks: this.props.userStuff.wubucks,
         })
         axios.get('http://localhost:5000/posts/')
             .then(res => {
@@ -98,24 +99,6 @@ export default class homepage extends Component {
             
     }
 
-    // manualOverload() {
-    //     console.log('inside manual overload');
-    //     axios.get('http://localhost:5000/posts/')
-    //         .then(res => {
-    //             res.data.forEach(post => {
-    //                 this.setState({
-    //                     posts: [...this.state.posts, post]
-    //                 })
-    //             });
-    //         })
-    //         .then(() => {
-    //             console.log(this.state.posts);
-    //             //this.props.history.push('/home');
-    //             this.render();
-    //         })
-    //         .catch((err)=>console.log(err));
-    // }
-
     calculateWidth(a, b) {
         let oneSlice;
         if (a == 0 && b == 0) { 
@@ -138,30 +121,15 @@ export default class homepage extends Component {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
         }
-        // let cUser = this.getUser()
-        // console.log(cUser);
-       // this.props.setUser(userStuff);
         this.props.history.push('/userprofile');
     }
 
     render() {
-        // axios.get('http://localhost:5000/posts/')
-        //     .then(res => {
-        //         res.data.forEach(post => {
-        //             this.setState({
-        //                 posts: [...this.state.posts, post]
-        //             })
-        //         });
-        //     })
-        //     .then(() => {
-        //         console.log(this.state.posts);
-        //     })
-        //     .catch((err)=>console.log(err));
-        
         console.log("rendering home page");
         return (
             <div>
                  <p>logged in as {this.state.username}</p>
+                 <p>you have {this.state.wubucks} wubucks</p>
                 <h3 class="welcome-message">"And I say, thou shalt bet. Thou shalt bravely gamble away all yer wee possessions!"</h3>
                 {this.state.posts.map((post, index) => {
                     let slice = this.calculateWidth(post.numberOfBetsA, post.numberOfBetsB);

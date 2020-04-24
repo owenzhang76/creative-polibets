@@ -13,15 +13,23 @@ export default class Checkout extends Component {
         this.state = {
             username: '',
             password: '',
-            userId: '',
+            id: '',
+            email: '',
+            firstname: '',
+            lastname: '',
+            wubucks: '',
         }
     };
 
     componentDidMount() {
         this.setState({
+            id: this.props.userStuff.id,
             username: this.props.userStuff.username,
-            
-        }) 
+            email: this.props.userStuff.email,
+            firstname: this.props.userStuff.firstname,
+            lastname: this.props.userStuff.lastname,
+            wubucks: this.props.userStuff.wubucks,
+        })
 
         
     }
@@ -29,11 +37,12 @@ export default class Checkout extends Component {
     
 
     render() {
-
+        //console.log(this.props.userStuff.id);
+        console.log(this.state)
         let product = {
-            name: "React from FB",
-            price: 10,
-            productBy: "facebook"
+            name: "500 wubucks",
+            price: 5,
+            productBy: "Polibets"
           }
 
           const makePayment = async token => {
@@ -52,10 +61,38 @@ export default class Checkout extends Component {
                   console.log("STATUS", status);
                     if(status == 200) {
                         console.log("inside if");
+                        let person = {
+                            id: this.props.userStuff.id,
+                            currencyAdd: 500
+                        };
+                        console.log(person);
                         try {
-                            let res = await axios.post('http://localhost:5000/users/login', body);
+                            let res = await axios.post('http://localhost:5000/users/updatebalance', person);
                             console.log(res);
-                        }                        
+                            const { status } = res;
+                            console.log("STATUS", status);
+                            let bitch = status;
+                            console.log(bitch);
+                            try {
+                                console.log('inside third try');
+                                if (bitch = 200) {
+                                    let thisUser = {
+                                        id: this.props.userStuff.id,
+                                        username: this.props.userStuff.username,
+                                        email: this.props.userStuff.email,
+                                        firstname: this.props.userStuff.firstname,
+                                        lastname: this.props.userStuff.lastname,
+                                        wubucks: this.props.userStuff.wubucks + 500,
+                                    }
+                                    console.log('inside if 2nd');
+                                    this.props.updateUser(thisUser)
+                                    this.props.history.push('/home');
+                                } 
+                            } catch (error) {
+                                return console.log(error);
+                            }
+                            
+                        }                         
                         catch (error) {
                             return console.log(error);
                         }
