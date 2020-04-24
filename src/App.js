@@ -17,6 +17,7 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.maintainUser = this.maintainUser.bind(this);
     this.setUser = this.setUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.state = {
@@ -29,6 +30,19 @@ export default class App extends React.Component {
       wubucks: '',
     };
   };
+
+  maintainUser(user) {
+    console.log("inside maintain");
+    this.setState({
+      loggedIn: true,
+      id: user['id'],
+      username: user['username'],
+      firstname: user['firstname'],
+      lastname: user['lastname'],
+      email: user['email'],
+      wubucks: user['wubucks'],
+    });
+  }
 
   updateUser(user) {
     console.log("inside updateUser function in App.js")
@@ -95,12 +109,12 @@ export default class App extends React.Component {
 
           <Router>
           <br/>
-          <Route path="/checkout" render={props => (<Checkout {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/checkout" render={props => (<Checkout {...props} maintainUser={this.maintainUser} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/paymentbuttontest" exact component={PaymentButton}></Route>
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
-          <Route path="/home" render={props => (<HomePage {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
-          <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/home" render={props => (<HomePage {...props} maintainUser={this.maintainUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
+          <Route path="/createpost" render={props => (<CreatePost {...props} maintainUser={this.maintainUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/userprofile" render={props => (<UserProfile {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
         </div>

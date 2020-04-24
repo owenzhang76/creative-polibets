@@ -9,7 +9,6 @@ export default class UserProfile extends Component {
         this.goToCheckout = this.goToCheckout.bind(this);
         this.goHome = this.goHome.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeFirstname = this.onChangeFirstname.bind(this);
@@ -65,12 +64,6 @@ export default class UserProfile extends Component {
     onChangeUsername(e) {
         this.setState({
             username: e.target.value
-        })
-    };
-
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
         })
     };
     
@@ -154,9 +147,6 @@ export default class UserProfile extends Component {
                
                 <label>Username:</label>
                 <input id="username-submit" type="text" value={this.state.username} onChange={this.onChangeUsername} />
-                <br />
-                <label>Password:</label>
-                <input id="password-submit" type="text" value={this.state.password} onChange={this.onChangePassword} />
                 <br />
                 <label>Email:</label>
                 <input id="email-submit" type="text" value={this.state.email} onChange={this.onChangeEmail} />

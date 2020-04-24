@@ -5,6 +5,7 @@ import update from 'react-addons-update';
 export default class homepage extends Component {
     constructor(props) {
         super(props);
+        this.logout = this.logout.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.goToCreatePost = this.goToCreatePost.bind(this);
         this.placeBet = this.placeBet.bind(this);
@@ -19,6 +20,7 @@ export default class homepage extends Component {
             firstname: '',
             lastname: '',
             posts: [],
+            wubucks: ''
         };
     };
 
@@ -45,18 +47,34 @@ export default class homepage extends Component {
             })
             .catch((err)=>console.log(err));
     }
+
+    logout(e) {
+        e.preventDefault();
+        const userStuff = {
+            id: '',
+            username: '',
+            email: '',
+            firstname: '',
+            lastname: '',
+            wubucks: ''
+        }
+        this.props.history.push('/login');
+    }
     
     goToCreatePost(e) {
         e.preventDefault();
         console.log("inside button for go to createpost")
         const userStuff = {
+            id: this.props.userStuff.id,
             username: this.state.username,
             email: this.state.email,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
+            wubucks: this.state.wubucks
         }
         console.log(userStuff);
-        this.props.setUser(userStuff);
+        this.props.maintainUser(userStuff);
+        console.log(this.props.userStuff);
         this.props.history.push('/createpost')
     }
 
@@ -65,7 +83,7 @@ export default class homepage extends Component {
         console.log('Inside placebet frontend');
         
         const bet = {
-            personId: this.state.id,
+            personId: this.props.userStuff.id,
             postId: this.state.posts[e.target.name]['_id'],
             option: `numberOfBets${e.target.id}`,
             optionName: e.target.value,
@@ -80,8 +98,16 @@ export default class homepage extends Component {
             .then( () => {
                 axios.get('http://localhost:5000/posts/')
                 .then(res => {
+                    console.log(this.props.userStuff.id);
                     this.setState({
-                        posts: []
+                        posts: [],
+                        id: this.props.userStuff.id,
+                        username: this.props.userStuff.username,
+                        email: this.props.userStuff.email,
+                        firstname: this.props.userStuff.firstname,
+                        lastname: this.props.userStuff.lastname,
+                        wubucks: this.props.userStuff.wubucks,
+
                      });
                     res.data.forEach(post => {
                         this.setState({
@@ -195,6 +221,7 @@ export default class homepage extends Component {
                 })}
                 <button id="go-to-createpost-button" onClick={this.goToCreatePost}>Create Post</button>
                 <button id="go-to-userprofile-button" onClick={this.goToUserProfile}>User Profile</button>
+                <button id="logout-button" onClick={this.logout}>Logout</button>
             </div>
             );
     };

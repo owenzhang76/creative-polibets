@@ -104,7 +104,8 @@ export default class createPost extends Component {
                     oddsB: '',
                     expiryDate: '',
                 });
-                this.props.setUser(this.props.userStuff);
+                console.log(this.props.userStuff);
+                this.props.maintainUser(this.props.userStuff);
                 this.props.history.push('/home');
             })
             .catch((err)=>console.log(err));

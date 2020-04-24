@@ -109,20 +109,20 @@ router.route('/register').post((req, res) => {
 
 
     
-    newUser.save(function(err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('no error');
-            return user;
-        }
-    })
+    // newUser.save(function(err, user) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log('no error');
+    //         return user;
+    //     }
+    // })
     // .then((user) => res.json('New user added!'))
     // .catch(err => res.status(400).json('Error: ' + err))
 
-    // newUser.save()
-    //     .then(() => res.json('New user added!'))
-    //     .catch(err => res.status(400).json('Error: ' + err))
+    newUser.save()
+        .then(() => res.json('New user added!'))
+        .catch(err => res.status(400).json('Error: ' + err))
 });
 
 router.route('/login').post((req, res) => {

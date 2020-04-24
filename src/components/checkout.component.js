@@ -85,7 +85,7 @@ export default class Checkout extends Component {
                                         wubucks: this.props.userStuff.wubucks + 500,
                                     }
                                     console.log('inside if 2nd');
-                                    this.props.updateUser(thisUser)
+                                    this.props.maintainUser(thisUser)
                                     this.props.history.push('/home');
                                 } 
                             } catch (error) {
@@ -110,9 +110,9 @@ export default class Checkout extends Component {
             <StripeCheckout 
         stripeKey="pk_test_62nysTnZ8K7rxfw2Im3z5lLU00rv4PTceF"
         token={makePayment}
-        name="Buy my shit">
+        name="Buy Some Tokens">
           <button className="btn-large pink" >
-          Suck me off, please just suck me off: Only {product.price} dollars</button>
+          Need more tokens?</button>
 
         
 
