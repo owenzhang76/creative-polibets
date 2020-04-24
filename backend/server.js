@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const stripe = require('stripe')('sk_test_Ialnbc8Ba2hBjrEoLZdcsnY500UOJ57upo');
+const uuid = require('uuid/v4');
 
 require('dotenv').config();
 
@@ -33,10 +34,7 @@ const usersRouter = require('./routes/users');
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 
-app.post('/charge', function(req, res)  {
-    console.log("inside /users/charge for stripe boiii");
-    console.log(req.body);
-})
+
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

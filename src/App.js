@@ -10,11 +10,18 @@ import LoginForm from './components/loginForm.component';
 import CreatePost from './components/createPost.component';
 import UserProfile from './components/userprofile.component';
 import PaymentButton from './components/paymentButton.component';
+import Checkout from './components/checkout.component';
+
 
 export default class App extends React.Component {
 
+ 
+
   constructor(props) {
     super(props);
+
+    
+
     this.setUser = this.setUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.state = {
@@ -28,6 +35,8 @@ export default class App extends React.Component {
   };
 
   
+  
+
 
   updateUser(user) {
     console.log("inside updateUser function in App.js")
@@ -77,6 +86,7 @@ export default class App extends React.Component {
   // }
 
   render () {
+    
     console.log("inside render testing state");
     console.log(this.state);
 
@@ -93,9 +103,19 @@ export default class App extends React.Component {
     console.log(userStuff);
 
       return (
-        <Router>
-         
+        <div>
+
+        {/* <StripeProvider apiKey="pk_test_62nysTnZ8K7rxfw2Im3z5lLU00rv4PTceF">
+          <Elements>
+            <Form />
+          </Elements>
+        </StripeProvider> */}
+
+        
+
+          <Router>
           <br/>
+          <Route path="/checkout" render={props => (<Checkout {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/paymentbuttontest" exact component={PaymentButton}></Route>
           <Route path="/" exact component={registerForm}></Route>
           <Route path="/login" render={props => (<LoginForm {...props} setUser={this.setUser}/>)}></Route>
@@ -103,6 +123,7 @@ export default class App extends React.Component {
           <Route path="/createpost" render={props => (<CreatePost {...props} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
           <Route path="/userprofile" render={props => (<UserProfile {...props} updateUser={this.updateUser} setUser={this.setUser} userStuff={userStuff}/>)}></Route>
         </Router>
+        </div>
       );
   }
 }

@@ -6,6 +6,7 @@ export default class UserProfile extends Component {
     constructor(props) {
         super(props);
 
+        this.goToCheckout = this.goToCheckout.bind(this);
         this.goHome = this.goHome.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
@@ -42,6 +43,10 @@ export default class UserProfile extends Component {
 
     goHome() {
         this.props.history.push('/home');
+    }
+
+    goToCheckout() {
+        this.props.history.push('/checkout');
     }
 
     
@@ -151,6 +156,7 @@ export default class UserProfile extends Component {
                 <br />
                 <input id="update-submit" type="submit" />
                 <button id="go-to-homepage-button" onClick={this.goHome}>Home</button>
+                <button id="go-to-checkout-button" onClick={this.goToCheckout}>Checkout</button>
                 </form>
             
         );

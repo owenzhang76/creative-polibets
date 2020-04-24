@@ -1,8 +1,62 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const stripe = require('stripe')('sk_test_Ialnbc8Ba2hBjrEoLZdcsnY500UOJ57upo');
+const uuid = require('uuid/v4');
+// const paymentApi = require("./payment");
 let User = require('../models/userModel');
 
+// const stripeChargeCallback = res => (stripeErr, stripeRes) => {
+//     if (stripeErr) {
+//       res.status(500).send({ error: stripeErr });
+//     } else {
+//       res.status(200).send({ success: stripeRes });
+//     }
+//   };
 
+//   app.post("/", (req, res) => {
+//     const body = {
+//       source: req.body.token.id,
+//       amount: req.body.amount,
+//       currency: "usd"
+//     };
+//     stripe.charges.create(body, stripeChargeCallback(res));
+// });
+
+
+
+
+router.route('/payment').post((req, res) =>  {
+    console.log("inside /users/charge for stripe boiii");
+  //  const { product, token } = req.body;
+
+  let product = req.body.product;
+  let token = req.body.token;
+
+    // const body = {
+    //     product: req.body.product,
+    //     token: req.body.token,
+    //   };
+
+    console.log("product", product);
+    console.log("product price", product.price);
+    idempontencyKey = uuid();
+
+    return stripe.customers.create({
+        email: token.email,
+        source: token.id
+    })
+    .then(customer => {
+        stripe.charges.create({
+            amount: product.price * 100,
+            currency: 'usd',
+            customer: customer.id,
+            receipt_email: token.email,
+            description: product.name
+        }, {idempontencyKey});
+    })
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log(err))
+});
 
 router.route('/edituser').post((req, res) => {
     console.log("Inside /users/edituser Post");
